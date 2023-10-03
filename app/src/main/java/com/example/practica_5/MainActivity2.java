@@ -2,12 +2,14 @@ package com.example.practica_5;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
-import android.widget.Button;
 import android.os.Bundle;
+import android.widget.Button;
 
 public class MainActivity2 extends AppCompatActivity {
     TextView Ganadas1, Ganadas2;
@@ -17,6 +19,7 @@ public class MainActivity2 extends AppCompatActivity {
     int ganadas1 = 0;
     int ganadas2 = 0;
     int[] tablero = new int[9];
+    int jugadas = 0;
     int[][] combinaciones = new int[][]{
         {0,1,2},
         {3,4,5},
@@ -32,8 +35,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Ganadas1 = findViewById(R.id.ganadorplayer1);
-        Ganadas2 = findViewById(R.id.ganadorplayer2);
         espacio1 = findViewById(R.id.espacio1);
         espacio2 = findViewById(R.id.espacio2);
         espacio3 = findViewById(R.id.espacio3);
@@ -44,6 +45,8 @@ public class MainActivity2 extends AppCompatActivity {
         espacio8 = findViewById(R.id.espacio8);
         espacio9 = findViewById(R.id.espacio9);
         reiniciar = findViewById(R.id.reiniciar);
+
+
         reiniciar.setOnClickListener(v -> {
             reiniciar();
         });
@@ -173,6 +176,9 @@ public class MainActivity2 extends AppCompatActivity {
                 verificar();
             }
         });
+        if (jugadas == 5){
+            interfazresultados();
+        }
     }
     public void reiniciar(){
         ganador = false;
@@ -187,6 +193,7 @@ public class MainActivity2 extends AppCompatActivity {
         espacio7.setImageResource(R.drawable.transparente);
         espacio8.setImageResource(R.drawable.transparente);
         espacio9.setImageResource(R.drawable.transparente);
+        jugadas++;
 
     }
     public void verificar(){
@@ -203,6 +210,7 @@ public class MainActivity2 extends AppCompatActivity {
                     dialog.show();
                     Ganadas1.setText("" + ganadas1);
                     reiniciar();
+                    jugadas++;
 
                 }else{
                     ganadas2++;
@@ -214,8 +222,15 @@ public class MainActivity2 extends AppCompatActivity {
                     dialog.show();
                     Ganadas2.setText("" + ganadas2);
                     reiniciar();
+                    jugadas++;
                 }
             }
         }
+    }
+    public void interfazresultados(){
+        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+            intent.putExtra("ganadas1", ganadas1);
+            intent.putExtra("ganadas2", ganadas2);
+        startActivity(intent);
     }
 }
