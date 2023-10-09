@@ -20,6 +20,7 @@ public class MainActivity2 extends AppCompatActivity {
     int ganadas2 = 0;
     int[] tablero = new int[9];
     int jugadas = 0;
+    int contador = 0;
     int[][] combinaciones = new int[][]{
         {0,1,2},
         {3,4,5},
@@ -176,25 +177,22 @@ public class MainActivity2 extends AppCompatActivity {
                 verificar();
             }
         });
-        if (jugadas == 5){
-            interfazresultados();
-        }
+
     }
     public void reiniciar(){
-        ganador = false;
-        turno = 1;
-        tablero = new int[9];
-        espacio1.setImageResource(R.drawable.transparente);
-        espacio2.setImageResource(R.drawable.transparente);
-        espacio3.setImageResource(R.drawable.transparente);
-        espacio4.setImageResource(R.drawable.transparente);
-        espacio5.setImageResource(R.drawable.transparente);
-        espacio6.setImageResource(R.drawable.transparente);
-        espacio7.setImageResource(R.drawable.transparente);
-        espacio8.setImageResource(R.drawable.transparente);
-        espacio9.setImageResource(R.drawable.transparente);
-        jugadas++;
-
+            contador = 0;
+            ganador = false;
+            turno = 1;
+            tablero = new int[9];
+            espacio1.setImageResource(R.drawable.transparente);
+            espacio2.setImageResource(R.drawable.transparente);
+            espacio3.setImageResource(R.drawable.transparente);
+            espacio4.setImageResource(R.drawable.transparente);
+            espacio5.setImageResource(R.drawable.transparente);
+            espacio6.setImageResource(R.drawable.transparente);
+            espacio7.setImageResource(R.drawable.transparente);
+            espacio8.setImageResource(R.drawable.transparente);
+            espacio9.setImageResource(R.drawable.transparente);
     }
     public void verificar(){
         for(int i = 0; i < combinaciones.length; i++){
@@ -202,27 +200,47 @@ public class MainActivity2 extends AppCompatActivity {
                 ganador = true;
                 if(tablero[combinaciones[i][0]] == 1){
                     ganadas1++;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Ganador");
-                    builder.setMessage("El jugador 1 ha ganado");
-                    builder.setPositiveButton("Aceptar", null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    Ganadas1.setText("" + ganadas1);
-                    reiniciar();
                     jugadas++;
-
-                }else{
+                    if (jugadas == 5){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Ganador");
+                        builder.setMessage("El jugador 1 ha ganado");
+                        builder.setPositiveButton("Aceptar", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        interfazresultados();
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Ganador");
+                        builder.setMessage("El jugador 1 ha ganado");
+                        builder.setPositiveButton("Aceptar", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                    reiniciar();
+                    }
+                else{
                     ganadas2++;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Ganador");
-                    builder.setMessage("El jugador 2 ha ganado");
-                    builder.setPositiveButton("Aceptar", null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    Ganadas2.setText("" + ganadas2);
-                    reiniciar();
                     jugadas++;
+                    if (jugadas == 5){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Ganador");
+                        builder.setMessage("El jugador 2 ha ganado");
+                        builder.setPositiveButton("Aceptar", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        interfazresultados();
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Ganador");
+                        builder.setMessage("El jugador 2 ha ganado");
+                        builder.setPositiveButton("Aceptar", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                    reiniciar();
                 }
             }
         }

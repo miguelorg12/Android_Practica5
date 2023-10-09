@@ -31,7 +31,7 @@ public class MainActivity3 extends AppCompatActivity {
         } else {
             avisoganar.setText("Empate");
         }
-        new CountDownTimer(20000, 1000) {
+        new CountDownTimer(7000, 1000) {
             public void onTick(long millisUntilFinished) {
                 textoregreso.setText("Regresando al juego en: " + millisUntilFinished / 1000);
             }
